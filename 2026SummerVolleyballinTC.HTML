@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 台中排球包棟 (Vol. 2)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Timeline styling */
+        .timeline-container { position: relative; padding-left: 1.5rem; }
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 0.35rem;
+            top: 0.5rem;
+            bottom: 0;
+            width: 2px;
+            background-color: #cbd5e1;
+        }
+        .timeline-item { position: relative; margin-bottom: 1.5rem; }
+        .timeline-dot {
+            position: absolute;
+            left: -1.5rem;
+            top: 0.25rem;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background-color: #0ea5e9;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #0ea5e9;
+        }
+
+        /* Checkbox styling */
+        .player-cb:checked + div {
+            background-color: #0ea5e9;
+            color: white;
+            border-color: #0ea5e9;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+    </style>
+</head>
+<body class="text-slate-800 pb-20 md:pb-0">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-brand-900 to-brand-600 text-white pt-10 pb-6 px-4 shadow-md rounded-b-3xl relative overflow-hidden">
+        <i class="fa-solid fa-plane-departure absolute -right-10 -bottom-10 text-9xl opacity-10"></i>
+        <div class="max-w-3xl mx-auto relative z-10">
+            <div class="flex items-center justify-between mb-2">
+                <span class="bg-white/20 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm">Vol. 2 總計畫</span>
+                <!-- Action Badges (Countdown & Weather) -->
+                <div class="flex gap-2">
+                    <div class="bg-blue-500/30 backdrop-blur-md px-2 py-1 rounded-lg text-xs font-bold text-white shadow-inner flex items-center border border-blue-400/30">
+                        <i class="fa-solid fa-sun text-yellow-300 mr-1.5"></i>台中
+                    </div>
+                    <div class="bg-brand-900/50 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-mono font-bold text-yellow-300 shadow-inner flex items-center border border-brand-500/30">
+                        <i class="fa-solid fa-hourglass-half animate-pulse mr-1.5"></i>
+                        <span id="countdownDisplay">計算中...</span>
+                    </div>
+                </div>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold mb-2 leading-tight">台中排球包棟專案 <i class="fa-solid fa-volleyball ml-1 text-yellow-300"></i></h1>
+            <div class="flex flex-wrap gap-3 text-sm text-brand-100 mt-4">
+                <div class="flex items-center"><i class="fa-regular fa-calendar mr-1.5"></i> 2026/7/18 - 7/20</div>
+                <div class="flex items-center"><i class="fa-solid fa-users mr-1.5"></i> 22 人參與</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md shadow-sm overflow-x-auto no-scrollbar border-b border-slate-200">
+        <div class="max-w-3xl mx-auto flex whitespace-nowrap px-2">
+            <button onclick="switchTab('roles')" id="tab-roles" class="tab-btn active px-4 py-4 text-sm font-bold text-brand-600 border-b-2 border-brand-600 transition flex-1 text-center">
+                <i class="fa-solid fa-user-group mb-1 block text-lg"></i>分工
+            </button>
+            <button onclick="switchTab('itinerary')" id="tab-itinerary" class="tab-btn px-4 py-4 text-sm font-bold text-slate-500 border-b-2 border-transparent hover:text-brand-600 transition flex-1 text-center">
+                <i class="fa-regular fa-clock mb-1 block text-lg"></i>行程
+            </button>
+            <button onclick="switchTab('transport')" id="tab-transport" class="tab-btn px-4 py-4 text-sm font-bold text-slate-500 border-b-2 border-transparent hover:text-brand-600 transition flex-1 text-center">
+                <i class="fa-solid fa-car mb-1 block text-lg"></i>交通
+            </button>
+            <button onclick="switchTab('rooms')" id="tab-rooms" class="tab-btn px-4 py-4 text-sm font-bold text-slate-500 border-b-2 border-transparent hover:text-brand-600 transition flex-1 text-center">
+                <i class="fa-solid fa-bed mb-1 block text-lg"></i>住宿
+            </button>
+            <button onclick="switchTab('finance')" id="tab-finance" class="tab-btn px-4 py-4 text-sm font-bold text-slate-500 border-b-2 border-transparent hover:text-brand-600 transition flex-1 text-center">
+                <i class="fa-solid fa-wallet mb-1 block text-lg"></i>財務
+            </button>
+            <button onclick="switchTab('drawer')" id="tab-drawer" class="tab-btn px-4 py-4 text-sm font-bold text-slate-500 border-b-2 border-transparent hover:text-brand-600 transition flex-1 text-center">
+                <i class="fa-solid fa-dice mb-1 block text-lg"></i>分隊
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto p-4 mt-2">
+
+        <!-- 1. 分工認領 -->
+        <section id="content-roles" class="tab-content block animate-fade-in">
+            <h2 class="text-xl font-bold mb-4 flex items-center text-slate-800"><span class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center mr-2">1</span>核心分工認領</h2>
+            
+            <div class="bg-green-50 border border-green-200 p-3 rounded-lg text-sm text-green-800 mb-5 shadow-sm">
+                <i class="fa-solid fa-circle-check text-green-500 mr-1"></i> 任務已全數認領完畢！請大家把自己當成該時段的最高負責人。
+            </div>
+
+            <h3 class="text-lg font-bold mb-3 text-slate-700 border-b-2 border-slate-200 pb-2">👑 全局統籌與特約專家</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-start">
+                    <div class="text-2xl mr-3">🎯</div>
+                    <div><div class="text-xs text-slate-500 font-bold">統籌 (1名)</div><div class="font-medium">陳兆鈞 (Chad) <span class="block text-xs text-slate-400 font-normal">球場、住宿、分車房</span></div></div>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-start">
+                    <div class="text-2xl mr-3">💰</div>
+                    <div><div class="text-xs text-slate-500 font-bold">財務長 (2名)</div>
+                        <div class="font-medium mt-1">陳怡瑄、Covia</div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-start">
+                    <div class="text-2xl mr-3">🏐</div>
+                    <div><div class="text-xs text-slate-500 font-bold">排球賽事總監 (1名)</div><div class="font-medium">林耿鋒 <span class="block text-xs text-slate-400 font-normal">D1&3排球分組、賽制規劃</span></div></div>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-start">
+                    <div class="text-2xl mr-3">📸</div>
+                    <div><div class="text-xs text-slate-500 font-bold">攝影師 (1名)</div>
+                        <div class="font-medium mt-1">謝采倪 Nita <span class="block text-xs text-slate-400 font-normal">註：另協請林昊支援單眼相機</span></div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-start md:col-span-2">
+                    <div class="text-2xl mr-3">🚗</div>
+                    <div><div class="text-xs text-slate-500 font-bold">車長 (5名)</div><div class="font-medium">品豪、Chad、Ruby、林昊、Leon</div></div>
+                </div>
+            </div>
+
+            <h3 class="text-lg font-bold mb-3 text-slate-700 border-b-2 border-slate-200 pb-2">⏳ 時段主理人 (Time-block Owners)</h3>
+            <div class="space-y-3">
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-bold text-slate-800">[A] 7/18 晚間：派對採買</span>
+                        <div class="flex gap-1"><span class="bg-brand-50 text-brand-600 border border-brand-200 px-2 py-0.5 rounded text-xs font-bold">董尚原、潘光頭、丹尼斯、陳建禎</span></div>
+                    </div>
+                    <p class="text-sm text-slate-500">預估晚上派對需求，於 18:30 帶隊前往全聯/量販店採買酒水與食物。</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-bold text-slate-800">[B] 7/19 午餐：睡醒覓食</span>
+                        <div class="flex gap-1"><span class="bg-brand-50 text-brand-600 border border-brand-200 px-2 py-0.5 rounded text-xs font-bold">曾琍婕、張語涵</span></div>
+                    </div>
+                    <p class="text-sm text-slate-500">負責大家睡醒後的午餐，可安排外送到派對房吃吃喝喝。</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 border-l-4 border-l-orange-400">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-bold text-slate-800">[C] 7/19 下午：酒精排球特派員</span>
+                        <div class="flex gap-1"><span class="bg-brand-50 text-brand-600 border border-brand-200 px-2 py-0.5 rounded text-xs font-bold">趙羿媚(Mei)、黃杉彬、潘光頭</span></div>
+                    </div>
+                    <p class="text-sm text-slate-500">買酒、規則、倒酒、場地整潔維護。<br><span class="text-orange-600 text-xs font-bold">⚠️ 喝酒統一在球場旁休息區，需設立有垃圾袋的喝酒區，避免弄壞場地。</span></p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-bold text-slate-800">[D] 7/19 晚間：宵夜外送與酒水</span>
+                        <div class="flex gap-1"><span class="bg-brand-50 text-brand-600 border border-brand-200 px-2 py-0.5 rounded text-xs font-bold">陳佩如(Cpz)、彭于鈞(Kai)</span></div>
+                    </div>
+                    <p class="text-sm text-slate-500">排球耗能後負責安排回 MOTEL 的外送宵夜，並評估補充酒水。</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 border-l-4 border-l-pink-400">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-bold text-slate-800">[E] 7/20 午後：漢來海港下午茶</span>
+                        <div class="flex gap-1"><span class="bg-brand-50 text-brand-600 border border-brand-200 px-2 py-0.5 rounded text-xs font-bold">施姵妤</span></div>
+                    </div>
+                    <p class="text-sm text-slate-500">負責 22 人訂位。<br><span class="text-pink-600 text-xs font-bold">⚠️ 請評估線上買餐券是否最便宜，並規劃大家停車問題。</span></p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-bold text-slate-800">[F] 7/20 傍晚：市區娛樂大亂鬥</span>
+                        <div class="flex gap-1"><span class="bg-brand-50 text-brand-600 border border-brand-200 px-2 py-0.5 rounded text-xs font-bold">Cassie品、劉宸瑋</span></div>
+                    </div>
+                    <p class="text-sm text-slate-500">統籌傍晚育樂。請參考火車站共用地圖清單調查意願，可分開行動或一起行動。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 行程表 -->
+        <section id="content-itinerary" class="tab-content hidden animate-fade-in">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
+                <h2 class="text-xl font-bold flex items-center text-slate-800">
+                    <span class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center mr-2">2</span>詳細行程表
+                </h2>
+                <!-- 一鍵加入全部行事曆 -->
+                <button onclick="downloadICS()" class="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-sm transition flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-calendar-check mr-2"></i> 一鍵匯入全部行程 (.ics)
+                </button>
+            </div>
+            
+            <div class="bg-blue-50 border border-blue-200 p-3 rounded-lg text-sm text-blue-800 mb-5 shadow-sm flex items-center">
+                <i class="fa-solid fa-location-arrow text-blue-500 mr-2 text-lg"></i>
+                <span>點擊行程右側的按鈕，可直接開啟地圖導航或單筆加入行事曆！</span>
+            </div>
+
+            <!-- Day 1 -->
+            <div class="mb-8">
+                <div class="bg-slate-800 text-white px-4 py-2 rounded-lg font-bold inline-block mb-4 shadow-sm">Day 1：7/18 (六) 熱血開局</div>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">09:00 - 11:30</div>
+                            <div class="flex gap-2">
+                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                </a>
+                                <button onclick="addToCalendar('🚗 前往台中包棟', '20260718T010000Z', '20260718T033000Z', '出發前往台中，依照各車群組約定地點上車。', '台中市')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-100">
+                            <div class="font-bold text-slate-800"><i class="fa-solid fa-car mr-1 text-slate-400"></i> 開車南下</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">11:30 - 15:00</div>
+                            <div class="flex gap-2">
+                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                </a>
+                                <button onclick="addToCalendar('🏐 排球包棟: 男網賽', '20260718T033000Z', '20260718T070000Z', '第一場熱血開打，男網賽事！', '諾亞方舟排球 西屯館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg shadow-sm border border-orange-100">
+                            <div class="font-bold text-orange-700">🏐 排球 - 男網</div>
+                            <div class="text-sm text-orange-600 mt-1">諾亞方舟 Noah's Ark 西屯館</div>
+                            <div class="text-xs text-orange-800 mt-1 font-bold">⚠️ 由林耿鋒進行分組，或使用 <button onclick="switchTab('drawer')" class="text-brand-600 underline font-bold bg-white px-2 py-0.5 rounded shadow-sm hover:bg-brand-50">分隊抽籤器</button></div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">15:00 - 18:00</div>
+                            <div class="flex gap-2">
+                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                </a>
+                                <button onclick="addToCalendar('🏐 排球包棟: 女網賽', '20260718T070000Z', '20260718T100000Z', '女網排球賽事！', '諾亞方舟排球 西屯館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg shadow-sm border border-orange-100">
+                            <div class="font-bold text-orange-700">🏐 排球 - 女網</div>
+                            <div class="text-sm text-orange-600 mt-1">諾亞方舟 Noah's Ark 西屯館</div>
+                            <div class="text-xs text-orange-800 mt-1 font-bold">⚠️ 由林耿鋒進行分組，或使用 <button onclick="switchTab('drawer')" class="text-brand-600 underline font-bold bg-white px-2 py-0.5 rounded shadow-sm hover:bg-brand-50">分隊抽籤器</button></div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">18:30 - 19:30</div>
+                            <div class="flex gap-2">
+                                <a href="https://maps.app.goo.gl/JbT15m7but9n7aLQ6" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>全聯導航
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-100">
+                            <div class="font-bold text-slate-800"><i class="fa-solid fa-cart-shopping mr-1 text-slate-400"></i> 全聯購物 + 買酒水食物</div>
+                            <div class="text-sm text-slate-500 mt-1">由 <span class="font-bold text-slate-700">董尚原、潘光頭、丹尼斯、陳建禎</span> 負責</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">20:00 - 24:00</div>
+                            <div class="flex gap-2">
+                                <a href="https://maps.app.goo.gl/FVZiUe9saaXzQZvq5" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                </a>
+                                <button onclick="addToCalendar('🏠 排球包棟: 晚餐與派對局', '20260718T120000Z', '20260718T160000Z', '入住 MOTEL，晚餐、喝酒、KTV派對時間！', '都樂 KTV MOTEL')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-indigo-50 p-3 rounded-lg shadow-sm border border-indigo-100">
+                            <div class="font-bold text-indigo-700"><i class="fa-solid fa-house-chimney mr-1"></i> 住宿點派對局 / 唱K + 晚餐</div>
+                            <div class="text-sm text-indigo-600 mt-1">都樂 KTV MOTEL</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="mb-8">
+                <div class="bg-slate-800 text-white px-4 py-2 rounded-lg font-bold inline-block mb-4 shadow-sm">Day 2：7/19 (日) 酒精與排球</div>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">10:00 - 13:30</div>
+                            <div class="flex gap-2">
+                                <a href="https://maps.app.goo.gl/FVZiUe9saaXzQZvq5" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-100 mt-1">
+                            <div class="font-bold text-slate-800"><i class="fa-solid fa-microphone mr-1 text-slate-400"></i> 住宿點唱K + 午餐</div>
+                            <div class="text-sm text-slate-500 mt-1">由 <span class="font-bold text-slate-700">曾琍婕、張語涵</span> 負責 (⚠️ 本時段絕對禁酒)</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">15:00 - 17:00</div>
+                            <div class="flex gap-2">
+                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                </a>
+                                <button onclick="addToCalendar('🏐 排球包棟: Day2 女網', '20260719T070000Z', '20260719T090000Z', '女網排球交流賽', '諾亞方舟排球 西屯館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg shadow-sm border border-orange-100 mt-1">
+                            <div class="font-bold text-orange-700">🏐 排球 - 女網</div>
+                            <div class="text-sm text-orange-600 mt-1">諾亞方舟 Noah's Ark 西屯館</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">17:00 - 22:00</div>
+                            <div class="flex gap-2">
+                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                </a>
+                                <button onclick="addToCalendar('🍻 酒精排球大戰', '20260719T090000Z', '20260719T140000Z', '酒精排球！需注意場地整潔。', '諾亞方舟排球 西屯館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 p-3 rounded-lg shadow-sm border border-red-100 mt-1">
+                            <div class="font-bold text-red-700">🍻 酒精排球</div>
+                            <div class="text-sm text-red-600 mt-1">諾亞方舟 Noah's Ark 西屯館 (由 <span class="font-bold text-red-800">趙羿媚(Mei)、黃杉彬、潘光頭</span> 負責)</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">22:30 - 24:00</div>
+                            <div class="flex gap-2">
+                                <a href="https://maps.app.goo.gl/FVZiUe9saaXzQZvq5" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bg-indigo-50 p-3 rounded-lg shadow-sm border border-indigo-100 mt-1">
+                            <div class="font-bold text-indigo-700"><i class="fa-solid fa-pizza-slice mr-1"></i> 住宿派對局 + 宵夜外送</div>
+                            <div class="text-sm text-indigo-600 mt-1">由 <span class="font-bold text-indigo-800">陳佩如(Cpz)、彭于鈞(Kai)</span> 負責</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="mb-8">
+                <div class="bg-slate-800 text-white px-4 py-2 rounded-lg font-bold inline-block mb-4 shadow-sm">Day 3：7/20 (一) 下午茶與市區</div>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">11:00 - 14:00</div>
+                            <div class="flex gap-2">
+                                <a href="https://maps.app.goo.gl/SLyH6p5q6G96nBVU8" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                </a>
+                                <button onclick="addToCalendar('🏐 排球包棟: 最終戰', '20260720T030000Z', '20260720T060000Z', '把最後體力榨乾的排球戰', '波長排球館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg shadow-sm border border-orange-100 mt-1">
+                            <div class="font-bold text-orange-700">🏐 排球 - 女網</div>
+                            <div class="text-sm text-orange-600 mt-1">波長排球館或諾亞方舟</div>
+                            <div class="text-xs text-orange-800 mt-1 font-bold">⚠️ 由林耿鋒進行分組，或使用 <button onclick="switchTab('drawer')" class="text-brand-600 underline font-bold bg-white px-2 py-0.5 rounded shadow-sm hover:bg-brand-50">分隊抽籤器</button></div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">14:30 - 16:30</div>
+                            <div class="flex gap-2">
+                                <a href="https://maps.app.goo.gl/ke5viTZS3koXjps59" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                </a>
+                                <button onclick="addToCalendar('🍰 漢來海港下午茶', '20260720T063000Z', '20260720T083000Z', '頂級下午茶吃到飽', '漢來海港 台中廣三SOGO店')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-pink-50 p-3 rounded-lg shadow-sm border border-pink-100 mt-1">
+                            <div class="font-bold text-pink-700">🍰 頂級下午茶</div>
+                            <div class="text-sm text-pink-600 mt-1">漢來海港 台中廣三SOGO店 (由 <span class="font-bold text-pink-800">施姵妤</span> 負責)</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">17:00 - 19:00</div>
+                            <div class="flex gap-2">
+                                <a href="https://maps.app.goo.gl/4EUjRXrBwv8UpaiX7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg shadow-sm border border-purple-100 mt-1">
+                            <div class="font-bold text-purple-700">🎳 市區娛樂大亂鬥</div>
+                            <div class="text-sm text-purple-600 mt-1">臺中火車站周邊 (由 <span class="font-bold text-purple-800">Cassie品、劉宸瑋</span> 負責，採現場AA)</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">19:30 - 22:00</div>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-100 mt-1">
+                            <div class="font-bold text-slate-800"><i class="fa-solid fa-car mr-1 text-slate-400"></i> 回台北</div>
+                            <div class="text-sm text-slate-500 mt-1">避開八點前尖峰。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 交通分車 -->
+        <section id="content-transport" class="tab-content hidden animate-fade-in">
+            <h2 class="text-xl font-bold mb-4 flex items-center text-slate-800"><span class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center mr-2">3</span>交通與分車名單</h2>
+            
+            <!-- 常用位置快捷導航 -->
+            <h3 class="font-bold text-lg mb-3 flex items-center text-slate-700 bg-slate-100 p-2 rounded-lg"><i class="fa-solid fa-map-location-dot mr-2 text-brand-500"></i> 📍 一鍵導航 (點擊直接開地圖)</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="bg-white border border-slate-200 p-3 rounded-xl shadow-sm hover:border-brand-500 hover:shadow-md transition flex items-center group">
+                    <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mr-3 shrink-0 group-hover:bg-brand-100 group-hover:text-brand-600"><i class="fa-solid fa-volleyball"></i></div>
+                    <div class="text-sm font-bold text-slate-700 leading-tight">諾亞方舟<br><span class="text-xs text-slate-500 font-normal">排球 西屯館</span></div>
+                </a>
+                <a href="https://maps.app.goo.gl/SLyH6p5q6G96nBVU8" target="_blank" class="bg-white border border-slate-200 p-3 rounded-xl shadow-sm hover:border-brand-500 hover:shadow-md transition flex items-center group">
+                    <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mr-3 shrink-0 group-hover:bg-brand-100 group-hover:text-brand-600"><i class="fa-solid fa-volleyball"></i></div>
+                    <div class="text-sm font-bold text-slate-700 leading-tight">波長排球館<br><span class="text-xs text-slate-500 font-normal">Day3 預備場地</span></div>
+                </a>
+                <a href="https://maps.app.goo.gl/FVZiUe9saaXzQZvq5" target="_blank" class="bg-white border border-slate-200 p-3 rounded-xl shadow-sm hover:border-brand-500 hover:shadow-md transition flex items-center group">
+                    <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mr-3 shrink-0 group-hover:bg-brand-100 group-hover:text-brand-600"><i class="fa-solid fa-hotel"></i></div>
+                    <div class="text-sm font-bold text-slate-700 leading-tight">都樂 KTV<br><span class="text-xs text-slate-500 font-normal">MOTEL 住宿點</span></div>
+                </a>
+                <a href="https://maps.app.goo.gl/ke5viTZS3koXjps59" target="_blank" class="bg-white border border-slate-200 p-3 rounded-xl shadow-sm hover:border-brand-500 hover:shadow-md transition flex items-center group">
+                    <div class="w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center mr-3 shrink-0 group-hover:bg-brand-100 group-hover:text-brand-600"><i class="fa-solid fa-cake-candles"></i></div>
+                    <div class="text-sm font-bold text-slate-700 leading-tight">漢來海港<br><span class="text-xs text-slate-500 font-normal">台中廣三SOGO店</span></div>
+                </a>
+                <a href="https://maps.app.goo.gl/JbT15m7but9n7aLQ6" target="_blank" class="bg-white border border-slate-200 p-3 rounded-xl shadow-sm hover:border-brand-500 hover:shadow-md transition flex items-center group">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3 shrink-0 group-hover:bg-brand-100 group-hover:text-brand-600"><i class="fa-solid fa-cart-shopping"></i></div>
+                    <div class="text-sm font-bold text-slate-700 leading-tight">全聯福利中心<br><span class="text-xs text-slate-500 font-normal">最近的採買點</span></div>
+                </a>
+                <a href="https://maps.app.goo.gl/4EUjRXrBwv8UpaiX7" target="_blank" class="bg-white border border-slate-200 p-3 rounded-xl shadow-sm hover:border-brand-500 hover:shadow-md transition flex items-center group">
+                    <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mr-3 shrink-0 group-hover:bg-brand-100 group-hover:text-brand-600"><i class="fa-solid fa-gamepad"></i></div>
+                    <div class="text-sm font-bold text-slate-700 leading-tight">市區娛樂清單<br><span class="text-xs text-slate-500 font-normal">Day3 傍晚活動</span></div>
+                </a>
+            </div>
+
+            <div class="bg-rose-50 border-l-4 border-rose-400 p-4 rounded-r-lg mb-6 shadow-sm">
+                <h4 class="font-bold text-rose-800 mb-2"><i class="fa-solid fa-triangle-exclamation mr-1"></i> 特殊交通動線提醒</h4>
+                <ul class="text-sm text-rose-700 space-y-1 list-disc list-inside">
+                    <li><strong>張語涵、董尚原：</strong> 第一天台中直接會合；第三天不回台北。</li>
+                    <li><strong>建禎、Nita：</strong> 星期日 (Day 2) 晚上提前回台北。</li>
+                    <li><strong>林昊 (車長)：</strong> 星期日 (Day 2) 有可能提早回台北，回程備有兩套方案。</li>
+                </ul>
+            </div>
+
+            <!-- 去程 -->
+            <h3 class="font-bold text-lg mb-3 flex items-center text-slate-700 bg-slate-100 p-2 rounded-lg"><i class="fa-solid fa-arrow-down mr-2 text-brand-500"></i> 去程：7/18 (六) 台北 ➔ 台中</h3>
+            <div class="text-sm text-slate-500 mb-3 ml-2 font-bold">⏰ 出發時間：上午 09:00</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3"><span class="font-bold text-brand-700">Car 1 (品豪)</span><div class="text-sm mt-1 text-slate-600">曾俐婕、陳怡瑄、簡懋甡(Dennis) <span class="text-xs text-slate-400 block mt-0.5">桃園-政大-台中</span></div></div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3"><span class="font-bold text-brand-700">Car 2 (Chad)</span><div class="text-sm mt-1 text-slate-600">施姵妤、彭于鈞(Kai)、陳建禎(Michael)、Nita <span class="text-xs text-slate-400 block mt-0.5">基隆-南港-麟光-台中</span></div></div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3"><span class="font-bold text-brand-700">Car 3 (Ruby)</span><div class="text-sm mt-1 text-slate-600">潘裔城、黃杉彬 <span class="text-xs text-slate-400 block mt-0.5">桃園-台中</span></div></div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3"><span class="font-bold text-brand-700">Car 4 (Leon)</span><div class="text-sm mt-1 text-slate-600">Cassie品、劉宸瑋 <span class="text-xs text-slate-400 block mt-0.5">永和-板橋-台中</span></div></div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3 md:col-span-2"><span class="font-bold text-brand-700">Car 5 (林昊)</span><div class="text-sm mt-1 text-slate-600">Cpz、林耿鋒、Mei <span class="text-xs text-slate-400 block mt-0.5">新三蘆-關渡-台中</span></div></div>
+            </div>
+
+            <!-- 在地機動 -->
+            <h3 class="font-bold text-lg mb-3 flex items-center text-slate-700 bg-slate-100 p-2 rounded-lg"><i class="fa-solid fa-arrows-spin mr-2 text-brand-500"></i> 台中在地移動：7/18 - 7/20</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8 text-sm">
+                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 1 (品豪)</strong><br><span class="text-slate-600">曾俐婕, Covia, 陳怡瑄</span></div>
+                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 2 (Chad)</strong><br><span class="text-slate-600">Kai, Michael, Nita</span></div>
+                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 3 (Ruby)</strong><br><span class="text-slate-600">潘裔城, 黃杉彬</span></div>
+                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 4 (Leon)</strong><br><span class="text-slate-600">Cassie品, 劉宸瑋</span></div>
+                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 5 (林昊)</strong><br><span class="text-slate-600">Cpz, 林耿鋒, Mei</span></div>
+                <div class="bg-amber-50 rounded-lg border border-amber-200 p-2"><strong class="text-amber-800">機動 6 (董尚原)</strong><br><span class="text-amber-700">Dennis, Olivia, 施姵妤</span></div>
+            </div>
+
+            <!-- 回程 -->
+            <h3 class="font-bold text-lg mb-3 flex items-center text-slate-700 bg-slate-100 p-2 rounded-lg"><i class="fa-solid fa-arrow-up mr-2 text-brand-500"></i> 回程：7/20 (一) 台中 ➔ 台北</h3>
+            <div class="text-sm text-slate-500 mb-4 ml-2 font-bold">⏰ 出發時間：晚上 19:30 (避開尖峰)</div>
+            
+            <div class="border-2 border-slate-200 rounded-xl overflow-hidden mb-4">
+                <div class="bg-slate-200 px-4 py-2 font-bold text-slate-700 border-b border-slate-200 flex items-center">
+                    <i class="fa-solid fa-route mr-2 text-slate-500"></i> 方案 A：無林昊
+                </div>
+                <div class="p-3 grid grid-cols-1 md:grid-cols-2 gap-2 text-sm bg-white">
+                    <div class="border border-slate-100 p-2 rounded"><strong class="text-brand-600">Car 1 (品豪):</strong> 曾俐婕, Covia, 陳怡瑄, Dennis</div>
+                    <div class="border border-slate-100 p-2 rounded"><strong class="text-brand-600">Car 2 (Chad):</strong> 施姵妤, Kai, 林耿鋒, Cpz</div>
+                    <div class="border border-slate-100 p-2 rounded"><strong class="text-brand-600">Car 3 (Ruby):</strong> 潘裔城, 黃杉彬</div>
+                    <div class="border border-slate-100 p-2 rounded"><strong class="text-brand-600">Car 4 (Leon):</strong> Cassie品, 劉宸瑋, Mei</div>
+                </div>
+            </div>
+
+            <div class="border-2 border-brand-200 rounded-xl overflow-hidden">
+                <div class="bg-brand-100 px-4 py-2 font-bold text-brand-800 border-b border-brand-200 flex items-center">
+                    <i class="fa-solid fa-route mr-2 text-brand-500"></i> 方案 B：有林昊
+                </div>
+                <div class="p-3 grid grid-cols-1 md:grid-cols-2 gap-2 text-sm bg-white">
+                    <div class="border border-brand-50 p-2 rounded"><strong class="text-brand-600">Car 1 (品豪):</strong> 曾俐婕, Covia, 陳怡瑄, Dennis</div>
+                    <div class="border border-brand-50 p-2 rounded"><strong class="text-brand-600">Car 2 (Chad):</strong> 施姵妤, Kai</div>
+                    <div class="border border-brand-50 p-2 rounded"><strong class="text-brand-600">Car 3 (Ruby):</strong> 潘裔城, 黃杉彬</div>
+                    <div class="border border-brand-50 p-2 rounded"><strong class="text-brand-600">Car 4 (Leon):</strong> Cassie品, 劉宸瑋</div>
+                    <div class="border border-brand-50 p-2 rounded md:col-span-2"><strong class="text-brand-600">Car 5 (林昊):</strong> Cpz, 林耿鋒, Mei</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 住宿分房 -->
+        <section id="content-rooms" class="tab-content hidden animate-fade-in">
+            <h2 class="text-xl font-bold mb-4 flex items-center text-slate-800"><span class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center mr-2">4</span>住宿分房名單</h2>
+            
+            <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-xl mb-6 shadow-sm">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-3 pb-3 border-b border-indigo-200">
+                    <div class="font-bold text-lg text-indigo-900 flex items-center">
+                        <i class="fa-solid fa-hotel mr-2"></i> 都樂 KTV MOTEL
+                    </div>
+                    <a href="https://www.doule-motel.com.tw/" target="_blank" class="text-sm bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-lg shadow-sm transition flex items-center mt-2 sm:mt-0 font-bold">
+                        <i class="fa-solid fa-globe mr-1.5"></i> 官方網站
+                    </a>
+                </div>
+                <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+                    <div class="bg-white p-2.5 rounded-lg border border-indigo-100 flex items-center">
+                        <i class="fa-solid fa-clock-rotate-left text-indigo-400 mr-2 text-lg"></i>
+                        <div><span class="block text-xs text-slate-400">入住時間</span><span class="font-bold text-slate-700">19:00 之後</span></div>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-indigo-100 flex items-center">
+                        <i class="fa-solid fa-clock text-indigo-400 mr-2 text-lg"></i>
+                        <div><span class="block text-xs text-slate-400">退房時間</span><span class="font-bold text-slate-700">12:00 之前</span></div>
+                    </div>
+                </div>
+                <div class="bg-white p-3 rounded-lg border border-indigo-100">
+                    <ul class="text-sm text-slate-700 space-y-2 list-disc list-outside ml-4">
+                        <li><span class="font-bold text-indigo-800">24hr 專業 KTV 系統：</span>獨立完整並採 24hr 服務的多媒體視聽室，有別於其他 MOTEL 的 24 時停止服務限制，並以專業 KTV 觸控系統，擺脫難用的搖控及低劣的視聽音效。專業隔音空間保障住宿品質。</li>
+                        <li><span class="font-bold text-indigo-800">全館個人電競 PC：</span>房型均有個人 PC 電腦（專業網咖系統）— <strong class="text-red-500">ARAM 大亂鬥準備出動！</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Room A (KTV) -->
+                <div class="bg-gradient-to-br from-indigo-900 to-indigo-700 rounded-xl p-5 shadow-md text-white sm:col-span-2 relative overflow-hidden">
+                    <div class="absolute right-0 bottom-0 opacity-10 text-8xl"><i class="fa-solid fa-microphone-lines"></i></div>
+                    <div class="flex items-center mb-2 pb-2 border-b border-indigo-500/50">
+                        <div class="font-bold text-xl mr-2 text-yellow-300">Room A</div>
+                        <span class="bg-yellow-400 text-indigo-900 text-xs px-2 py-0.5 rounded font-bold uppercase tracking-wider">KTV 派對房</span>
+                    </div>
+                    <div class="text-sm font-medium text-indigo-100 mb-1">2+2 男房</div>
+                    <div class="text-lg font-bold">沈柏碩(Leon), 潘裔城, 黃杉彬, 劉宸瑋</div>
+                </div>
+
+                <!-- Room B -->
+                <div class="bg-white border border-blue-200 rounded-xl p-4 shadow-sm">
+                    <div class="font-bold text-blue-700 text-lg border-b border-slate-100 pb-2 mb-2">Room B <span class="text-sm font-normal text-slate-500 ml-1">2+1 男房</span></div>
+                    <div class="text-slate-700 font-medium leading-relaxed">Chad, 陳品豪, Dennis</div>
+                </div>
+
+                <!-- Room C -->
+                <div class="bg-white border border-blue-200 rounded-xl p-4 shadow-sm">
+                    <div class="font-bold text-blue-700 text-lg border-b border-slate-100 pb-2 mb-2">Room C <span class="text-sm font-normal text-slate-500 ml-1">2+1 男房</span></div>
+                    <div class="text-slate-700 font-medium leading-relaxed">林昊, 林耿鋒, Kai</div>
+                </div>
+
+                <!-- Room D -->
+                <div class="bg-white border border-pink-200 rounded-xl p-4 shadow-sm">
+                    <div class="font-bold text-pink-600 text-lg border-b border-slate-100 pb-2 mb-2">Room D <span class="text-sm font-normal text-slate-500 ml-1">2+1 女房</span></div>
+                    <div class="text-slate-700 font-medium leading-relaxed">Ruby, Mei, Cpz</div>
+                </div>
+
+                <!-- Room E -->
+                <div class="bg-white border border-pink-200 rounded-xl p-4 shadow-sm">
+                    <div class="font-bold text-pink-600 text-lg border-b border-slate-100 pb-2 mb-2">Room E <span class="text-sm font-normal text-slate-500 ml-1">2+1 女房</span></div>
+                    <div class="text-slate-700 font-medium leading-relaxed">陳怡瑄, 施姵妤, Cassie品</div>
+                </div>
+
+                <!-- Room F -->
+                <div class="bg-white border border-pink-200 rounded-xl p-4 shadow-sm">
+                    <div class="font-bold text-pink-600 text-lg border-b border-slate-100 pb-2 mb-2">Room F <span class="text-sm font-normal text-slate-500 ml-1">2+1 女房</span></div>
+                    <div class="text-slate-700 font-medium leading-relaxed">曾俐婕, Covia, Olivia</div>
+                </div>
+
+                <!-- Room G -->
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <div class="font-bold text-slate-700 text-lg border-b border-slate-200 pb-2 mb-2">Room G <span class="text-sm font-normal text-slate-500 ml-1">雙人房</span></div>
+                    <div class="text-slate-700 font-medium leading-relaxed">Michael, Nita</div>
+                    <div class="text-xs text-slate-400 mt-1">註：僅入住週六一晚</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 財務核算 -->
+        <section id="content-finance" class="tab-content hidden animate-fade-in">
+            <h2 class="text-xl font-bold mb-4 flex items-center text-slate-800"><span class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center mr-2">5</span>財務指引與核算</h2>
+            
+            <!-- 總預算概觀 -->
+            <div class="bg-gradient-to-br from-brand-500 to-brand-700 rounded-xl shadow-lg p-5 text-white mb-6 relative overflow-hidden">
+                <i class="fa-solid fa-coins absolute -right-4 -bottom-4 text-7xl opacity-20"></i>
+                <div class="text-brand-100 text-sm mb-1">本次專案預估總支出</div>
+                <div class="text-4xl font-bold tracking-tight mb-4">$135,050 <span class="text-sm font-normal">TWD</span></div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm border-t border-brand-400/50 pt-3">
+                    <div><span class="text-brand-200 block text-xs">住宿 (39.8%)</span>$53,760</div>
+                    <div><span class="text-brand-200 block text-xs">酒水飲食 (22.8%)</span>$30,800</div>
+                    <div><span class="text-brand-200 block text-xs">球場 (15.1%)</span>$20,340</div>
+                    <div><span class="text-brand-200 block text-xs">漢來下午茶 (10.8%)</span>$14,600</div>
+                </div>
+            </div>
+
+            <!-- 收款總表 -->
+            <h3 class="font-bold text-lg mb-3 text-slate-700 border-b-2 border-slate-200 pb-2">💰 收款總表 (總匯款金額以 $100 為最小單位進位)</h3>
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-r-lg mb-4 text-sm text-yellow-800">
+                ⚠️ 自費提醒：行程中僅 <strong>Day 3「市區娛樂」為自費項目</strong> (現場AA)，其餘皆已包含在預收公費中。
+            </div>
+            
+            <div class="space-y-3 mb-8">
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:justify-between sm:items-center">
+                    <div class="mb-2 sm:mb-0">
+                        <div class="font-bold text-slate-800">A. 一般乘客 <span class="text-xs text-slate-500 font-normal ml-1">13人</span></div>
+                        <div class="text-xs text-slate-400 mt-0.5">全包 + 車資 $650</div>
+                        <div class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 p-1.5 rounded inline-block">陳怡瑄, Dennis, 施姵妤, Kai, 潘裔城, 黃杉彬, Cassie品, 劉宸瑋, Cpz, 林耿鋒, Mei, Covia, 曾俐婕</div>
+                    </div>
+                    <div class="font-bold text-brand-600 text-lg self-end sm:self-auto">$6,700</div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex justify-between items-center">
+                    <div>
+                        <div class="font-bold text-slate-800">B. 台中會合 (乘客) <span class="text-xs text-slate-500 font-normal ml-1">1人</span></div>
+                        <div class="text-xs text-slate-400 mt-0.5">全包 + 在地車資 $200</div>
+                        <div class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 p-1.5 rounded inline-block">張語涵 (Olivia)</div>
+                    </div>
+                    <div class="font-bold text-brand-600 text-lg">$6,300</div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:justify-between sm:items-center">
+                    <div class="mb-2 sm:mb-0">
+                        <div class="font-bold text-slate-800">C. 全程車長 <span class="text-xs text-slate-500 font-normal ml-1">5人</span></div>
+                        <div class="text-xs text-slate-400 mt-0.5">全包 (免車資)</div>
+                        <div class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 p-1.5 rounded inline-block">品豪, Chad, Ruby, 林昊, Leon</div>
+                    </div>
+                    <div class="font-bold text-brand-600 text-lg self-end sm:self-auto">$6,100</div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex justify-between items-center">
+                    <div>
+                        <div class="font-bold text-slate-800">D. 台中會合 (車長) <span class="text-xs text-slate-500 font-normal ml-1">1人</span></div>
+                        <div class="text-xs text-slate-400 mt-0.5">【不住宿】其他全包 (免車資)</div>
+                        <div class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 p-1.5 rounded inline-block">董尚原</div>
+                    </div>
+                    <div class="font-bold text-brand-600 text-lg">$3,800</div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex justify-between items-center">
+                    <div>
+                        <div class="font-bold text-slate-800">E. 建禎 (半程打球) <span class="text-xs text-slate-500 font-normal ml-1">1人</span></div>
+                        <div class="text-xs text-slate-400 mt-0.5">單晚 + KTV/球/食 + 車資 $650</div>
+                        <div class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 p-1.5 rounded inline-block">陳建禎 (Michael)</div>
+                    </div>
+                    <div class="font-bold text-brand-600 text-lg">$4,800</div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex justify-between items-center">
+                    <div>
+                        <div class="font-bold text-slate-800">F. Nita (半程純玩) <span class="text-xs text-slate-500 font-normal ml-1">1人</span></div>
+                        <div class="text-xs text-slate-400 mt-0.5">單晚 + KTV/食 + 車資 $650</div>
+                        <div class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 p-1.5 rounded inline-block">謝采倪 (Nita)</div>
+                    </div>
+                    <div class="font-bold text-brand-600 text-lg">$3,800</div>
+                </div>
+            </div>
+
+            <!-- 酒水飲食拆解 -->
+            <h3 class="font-bold text-lg mb-3 text-slate-700 border-b-2 border-slate-200 pb-2">🍱 酒水與飲食預算拆解 (共 $30,800)</h3>
+            <p class="text-sm text-slate-500 mb-3">每人預收 $1,400。時段主理人可相互挪用預算，超支最後補收，結餘留作預備金。</p>
+            <div class="grid grid-cols-2 gap-3 mb-8">
+                <div class="bg-white border border-slate-200 rounded-lg p-3 text-center shadow-sm">
+                    <div class="text-xs text-slate-400 font-bold mb-1">D1 晚間 (正餐/派對)</div>
+                    <div class="text-lg font-bold text-slate-800">$600 <span class="text-xs text-slate-500 font-normal">/人</span></div>
+                </div>
+                <div class="bg-slate-100 border border-slate-300 rounded-lg p-3 text-center shadow-sm">
+                    <div class="text-xs text-slate-500 font-bold mb-1">D2 早午 <span class="text-red-500">(絕對禁酒)</span></div>
+                    <div class="text-lg font-bold text-slate-800">$200 <span class="text-xs text-slate-500 font-normal">/人</span></div>
+                </div>
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-3 text-center shadow-sm">
+                    <div class="text-xs text-orange-600 font-bold mb-1">D2 酒精排球專用</div>
+                    <div class="text-lg font-bold text-slate-800">$450 <span class="text-xs text-slate-500 font-normal">/人</span></div>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-3 text-center shadow-sm">
+                    <div class="text-xs text-slate-400 font-bold mb-1">D2 宵夜 (外送)</div>
+                    <div class="text-lg font-bold text-slate-800">$150 <span class="text-xs text-slate-500 font-normal">/人</span></div>
+                </div>
+            </div>
+
+            <!-- 交通資金池 -->
+            <h3 class="font-bold text-lg mb-3 text-slate-700 border-b-2 border-slate-200 pb-2">🚗 交通資金池運作專區</h3>
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+                <div class="flex justify-between text-sm mb-2">
+                    <span class="text-slate-600">📥 資金池收入 (含在地$200)</span>
+                    <span class="font-bold text-slate-800">$9,950</span>
+                </div>
+                <div class="flex justify-between text-sm mb-3 pb-3 border-b border-slate-200 border-dashed">
+                    <span class="text-slate-600">📤 車長補貼支出 (共5位)</span>
+                    <span class="font-bold text-red-600">-$8,300</span>
+                </div>
+                <div class="flex justify-between text-sm font-bold">
+                    <span class="text-slate-800">🅿️ 公用停車費預備金</span>
+                    <span class="text-green-600">$1,650</span>
+                </div>
+                
+                <div class="mt-4 pt-3 border-t border-slate-100 bg-slate-50 rounded p-3 text-xs text-slate-600 space-y-1">
+                    <strong class="text-slate-700">車長補貼明細：</strong>
+                    <div>• 品豪 ($1,800)：跑台北桃園折返</div>
+                    <div>• Chad ($1,700)：跑基隆</div>
+                    <div>• Leon, 林昊 ($1,600/人)：標準雙程</div>
+                    <div>• Ruby ($1,400)：桃園起降里程短</div>
+                    <div>• 董尚原 ($200)：在地機動支援</div>
+                    <div class="mt-2 text-rose-600">⚠️ 若林昊提前回台北，補貼扣 $100；若建禎/Nita沒搭到林昊車，從公款退每人 $200。停車費憑收據實報實銷。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 抽籤分隊器 -->
+        <section id="content-drawer" class="tab-content hidden animate-fade-in">
+            <h2 class="text-xl font-bold mb-4 flex items-center text-slate-800"><span class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center mr-2"><i class="fa-solid fa-dice"></i></span>排球抽籤分隊器</h2>
+            
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+                <h3 class="font-bold text-slate-700 mb-3 border-b border-slate-100 pb-2">1. 選擇參加抽籤的人員</h3>
+                
+                <!-- Males -->
+                <div class="mb-3">
+                    <div class="text-xs font-bold text-blue-600 mb-2 flex justify-between items-center">
+                        <span>👦 男生名單 (12人)</span>
+                        <button onclick="toggleCheckboxes('M')" class="text-slate-400 hover:text-blue-500 border border-slate-200 rounded px-2 py-0.5 transition">全選/取消</button>
+                    </div>
+                    <div class="flex flex-wrap gap-2" id="males-container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                
+                <!-- Females -->
+                <div class="mb-4">
+                    <div class="text-xs font-bold text-pink-600 mb-2 flex justify-between items-center">
+                        <span>👧 女生名單 (10人)</span>
+                        <button onclick="toggleCheckboxes('F')" class="text-slate-400 hover:text-pink-500 border border-slate-200 rounded px-2 py-0.5 transition">全選/取消</button>
+                    </div>
+                    <div class="flex flex-wrap gap-2" id="females-container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <h3 class="font-bold text-slate-700 mb-3 border-b border-slate-100 pb-2 mt-6">2. 選擇分隊設定</h3>
+                <div class="flex flex-col sm:flex-row gap-3 mb-4">
+                    <!-- 模式選擇 -->
+                    <select id="drawMode" class="bg-slate-50 border border-slate-300 text-slate-700 rounded-lg block w-full p-2.5 focus:ring-brand-500 focus:border-brand-500 font-medium">
+                        <option value="ALL">⚖️ 男女平均分配 (混合編組)</option>
+                        <option value="M">👦 只針對男生分隊</option>
+                        <option value="F">👧 只針對女生分隊</option>
+                    </select>
+                    
+                    <!-- 隊伍數量選擇 -->
+                    <select id="teamCount" class="bg-slate-50 border border-slate-300 text-slate-700 rounded-lg block w-full sm:w-auto p-2.5 focus:ring-brand-500 focus:border-brand-500 font-medium shrink-0">
+                        <option value="2">分成 2 隊</option>
+                        <option value="3">分成 3 隊</option>
+                        <option value="4">分成 4 隊</option>
+                        <option value="5">分成 5 隊</option>
+                    </select>
+
+                    <!-- 抽籤按鈕 -->
+                    <button onclick="drawTeams()" class="w-full sm:w-auto bg-brand-600 hover:bg-brand-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition duration-200 flex items-center justify-center whitespace-nowrap shrink-0">
+                        <i class="fa-solid fa-shuffle mr-2"></i> 產生分隊
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div id="drawResults" class="hidden mb-6">
+                <h3 class="font-bold text-slate-700 mb-3 text-center text-lg">🎉 分隊結果</h3>
+                <div id="teamsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Dynamically populated by JS -->
+                </div>
+            </div>
+
+            <!-- 隨機抽人器 -->
+            <div class="mt-8 border-t-2 border-slate-200 pt-6"></div>
+            <h2 class="text-xl font-bold mb-4 flex items-center text-slate-800"><span class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center mr-2"><i class="fa-solid fa-hand-pointer"></i></span>隨機抽人器</h2>
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+                <p class="text-sm text-slate-500 mb-4">系統將從上方<strong class="text-slate-700">已勾選的名單</strong>中，隨機抽出指定人數。</p>
+                <div class="flex flex-col sm:flex-row gap-3 mb-4 items-center">
+                    <div class="flex items-center w-full sm:w-auto">
+                        <label for="pickCount" class="font-bold text-slate-700 mr-3 whitespace-nowrap">要抽出幾人？</label>
+                        <input type="number" id="pickCount" min="1" max="22" value="1" class="bg-slate-50 border border-slate-300 text-slate-700 rounded-lg block w-full p-2.5 focus:ring-purple-500 focus:border-purple-500 font-bold text-center">
+                    </div>
+                    <button onclick="drawRandomPeople()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition duration-200 flex items-center justify-center whitespace-nowrap shrink-0">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> 開始抽籤
+                    </button>
+                </div>
+                
+                <div id="pickerResults" class="hidden mt-4 pt-4 border-t border-slate-100">
+                    <h3 class="font-bold text-slate-700 mb-3 text-center">🎯 中籤名單</h3>
+                    <div id="pickedContainer" class="flex flex-wrap gap-2 justify-center">
+                        <!-- JS populated -->
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+            const targetContent = document.getElementById('content-' + tabId);
+            targetContent.classList.remove('hidden');
+            targetContent.classList.add('block');
+
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('text-brand-600', 'border-brand-600');
+                el.classList.add('text-slate-500', 'border-transparent');
+            });
+            const activeTab = document.getElementById('tab-' + tabId);
+            activeTab.classList.remove('text-slate-500', 'border-transparent');
+            activeTab.classList.add('text-brand-600', 'border-brand-600');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- Google Calendar Single Event ---
+        function addToCalendar(title, startIso, endIso, details, location) {
+            const baseUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE";
+            const url = `${baseUrl}&text=${encodeURIComponent(title)}&dates=${startIso}/${endIso}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
+            window.open(url, '_blank');
+        }
+
+        // --- Google Calendar ALL Events (.ics download) ---
+        function downloadICS() {
+            let icsMSG = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Volleyball Trip//EN\n";
+
+            const events = [
+                { title: "🚗 前往台中包棟", start: "20260718T010000Z", end: "20260718T033000Z", desc: "出發前往台中，依照各車群組約定地點上車。", loc: "台中市" },
+                { title: "🏐 排球包棟: 男網賽", start: "20260718T033000Z", end: "20260718T070000Z", desc: "第一場熱血開打，男網賽事！", loc: "諾亞方舟排球 西屯館" },
+                { title: "🏐 排球包棟: 女網賽", start: "20260718T070000Z", end: "20260718T100000Z", desc: "女網排球賽事！", loc: "諾亞方舟排球 西屯館" },
+                { title: "🏠 排球包棟: 晚餐與派對局", start: "20260718T120000Z", end: "20260718T160000Z", desc: "入住 MOTEL，晚餐、喝酒、KTV派對時間！", loc: "都樂 KTV MOTEL" },
+                { title: "🏐 排球包棟: Day2 女網", start: "20260719T070000Z", end: "20260719T090000Z", desc: "女網排球交流賽", loc: "諾亞方舟排球 西屯館" },
+                { title: "🍻 酒精排球大戰", start: "20260719T090000Z", end: "20260719T140000Z", desc: "酒精排球！需注意場地整潔。", loc: "諾亞方舟排球 西屯館" },
+                { title: "🏐 排球包棟: 最終戰", start: "20260720T030000Z", end: "20260720T060000Z", desc: "把最後體力榨乾的排球戰", loc: "波長排球館" },
+                { title: "🍰 漢來海港下午茶", start: "20260720T063000Z", end: "20260720T083000Z", desc: "頂級下午茶吃到飽", loc: "漢來海港 台中廣三SOGO店" }
+            ];
+
+            events.forEach(e => {
+                icsMSG += "BEGIN:VEVENT\n";
+                icsMSG += "DTSTART:" + e.start + "\n";
+                icsMSG += "DTEND:" + e.end + "\n";
+                icsMSG += "SUMMARY:" + e.title + "\n";
+                icsMSG += "DESCRIPTION:" + e.desc + "\n";
+                icsMSG += "LOCATION:" + e.loc + "\n";
+                icsMSG += "END:VEVENT\n";
+            });
+            icsMSG += "END:VCALENDAR";
+
+            // Trigger Download
+            const blob = new Blob([icsMSG], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', '2026_Taichung_Volleyball_Trip.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // --- Countdown Timer Logic ---
+        function updateCountdown() {
+            // 目標時間: 2026-07-18 09:00:00 (台灣時間)
+            const targetDate = new Date('2026-07-18T09:00:00+08:00').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const displayElement = document.getElementById('countdownDisplay');
+
+            if (distance < 0) {
+                displayElement.innerHTML = "出發啦！🚀";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            displayElement.innerHTML = `${days}天 ${hours}時 ${minutes}分`;
+        }
+        setInterval(updateCountdown, 1000);
+
+        // --- Team Drawer Logic ---
+        const players = [
+            { id: 'm1', name: 'Chad', gender: 'M' },
+            { id: 'm2', name: '品豪', gender: 'M' },
+            { id: 'm3', name: 'Dennis', gender: 'M' },
+            { id: 'm4', name: '董尚原', gender: 'M' },
+            { id: 'm5', name: '林昊', gender: 'M' },
+            { id: 'm6', name: '林耿鋒', gender: 'M' },
+            { id: 'm7', name: 'Kai', gender: 'M' },
+            { id: 'm8', name: 'Leon', gender: 'M' },
+            { id: 'm9', name: '潘裔城', gender: 'M' },
+            { id: 'm10', name: '黃杉彬', gender: 'M' },
+            { id: 'm11', name: 'Michael', gender: 'M' },
+            { id: 'm12', name: '劉宸瑋', gender: 'M' },
+            { id: 'f1', name: 'Ruby', gender: 'F' },
+            { id: 'f2', name: 'Mei', gender: 'F' },
+            { id: 'f3', name: 'Cpz', gender: 'F' },
+            { id: 'f4', name: '陳怡瑄', gender: 'F' },
+            { id: 'f5', name: '施姵妤', gender: 'F' },
+            { id: 'f6', name: 'Cassie品', gender: 'F' },
+            { id: 'f7', name: '曾俐婕', gender: 'F' },
+            { id: 'f8', name: 'Covia', gender: 'F' },
+            { id: 'f9', name: 'Olivia', gender: 'F' },
+            { id: 'f10', name: 'Nita', gender: 'F' }
+        ];
+
+        // Initialize Checkboxes & Countdown
+        window.onload = () => {
+            updateCountdown();
+
+            const mContainer = document.getElementById('males-container');
+            const fContainer = document.getElementById('females-container');
+            
+            players.forEach(p => {
+                const label = document.createElement('label');
+                label.className = 'cursor-pointer relative';
+                label.innerHTML = `
+                    <input type="checkbox" value="${p.id}" class="player-cb sr-only peer" checked data-gender="${p.gender}">
+                    <div class="px-3 py-1 text-sm rounded-full border border-slate-300 text-slate-600 bg-white transition peer-checked:bg-brand-500 peer-checked:text-white peer-checked:border-brand-500 hover:bg-slate-50 select-none">
+                        ${p.name}
+                    </div>
+                `;
+                p.gender === 'M' ? mContainer.appendChild(label) : fContainer.appendChild(label);
+            });
+        };
+
+        function toggleCheckboxes(gender) {
+            const checkboxes = document.querySelectorAll(`.player-cb[data-gender="${gender}"]`);
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            checkboxes.forEach(cb => cb.checked = !allChecked);
+        }
+
+        function drawTeams() {
+            const mode = document.getElementById('drawMode').value;
+            const teamCount = parseInt(document.getElementById('teamCount').value, 10);
+            const selectedIds = Array.from(document.querySelectorAll('.player-cb:checked')).map(cb => cb.value);
+            let activePlayers = players.filter(p => selectedIds.includes(p.id));
+
+            if(mode === 'M') activePlayers = activePlayers.filter(p => p.gender === 'M');
+            if(mode === 'F') activePlayers = activePlayers.filter(p => p.gender === 'F');
+
+            if(activePlayers.length < teamCount) {
+                alert('選擇的玩家人數不足以分成 ' + teamCount + ' 隊！請多勾選一些玩家或減少隊伍數量。');
+                return;
+            }
+
+            // Shuffle array randomly
+            const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+            let teams = Array.from({length: teamCount}, () => []);
+
+            if (mode === 'ALL') {
+                // Mix gender evenly
+                let males = shuffle(activePlayers.filter(p => p.gender === 'M'));
+                let females = shuffle(activePlayers.filter(p => p.gender === 'F'));
+                
+                males.forEach((m, idx) => { teams[idx % teamCount].push(m); });
+                females.forEach((f, idx) => { teams[idx % teamCount].push(f); });
+            } else {
+                // Just shuffle everyone
+                let shuffled = shuffle(activePlayers);
+                shuffled.forEach((p, idx) => { teams[idx % teamCount].push(p); });
+            }
+
+            // Define card styles
+            const styles = [
+                {bg: 'bg-gradient-to-b from-orange-50 to-white', border: 'border-orange-200', text: 'text-orange-700', badge: 'bg-orange-100 text-orange-800'},
+                {bg: 'bg-gradient-to-b from-blue-50 to-white', border: 'border-blue-200', text: 'text-blue-700', badge: 'bg-blue-100 text-blue-800'},
+                {bg: 'bg-gradient-to-b from-emerald-50 to-white', border: 'border-emerald-200', text: 'text-emerald-700', badge: 'bg-emerald-100 text-emerald-800'},
+                {bg: 'bg-gradient-to-b from-purple-50 to-white', border: 'border-purple-200', text: 'text-purple-700', badge: 'bg-purple-100 text-purple-800'},
+                {bg: 'bg-gradient-to-b from-pink-50 to-white', border: 'border-pink-200', text: 'text-pink-700', badge: 'bg-pink-100 text-pink-800'}
+            ];
+
+            // Render Teams dynamically
+            const container = document.getElementById('teamsContainer');
+            container.innerHTML = '';
+
+            teams.forEach((team, idx) => {
+                const s = styles[idx % styles.length];
+                const teamName = 'Team ' + String.fromCharCode(65 + idx); // Team A, B, C...
+                
+                container.innerHTML += `
+                    <div class="${s.bg} border ${s.border} rounded-xl p-4 shadow-sm">
+                        <div class="flex items-center justify-between mb-3 border-b ${s.border} pb-2">
+                            <h4 class="font-bold ${s.text} text-lg">${teamName}</h4>
+                            <span class="${s.badge} text-xs px-2 py-1 rounded-full font-bold">${team.length} 人</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            ${team.map(p => `
+                                <span class="px-2.5 py-1 text-sm rounded-md shadow-sm border ${p.gender === 'M' ? 'bg-blue-50 border-blue-100 text-blue-700' : 'bg-pink-50 border-pink-100 text-pink-700'} font-medium">
+                                    ${p.name}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('drawResults').classList.remove('hidden');
+            document.getElementById('drawResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // --- Random Picker Logic ---
+        function drawRandomPeople() {
+            const count = parseInt(document.getElementById('pickCount').value, 10);
+            const selectedIds = Array.from(document.querySelectorAll('.player-cb:checked')).map(cb => cb.value);
+            let activePlayers = players.filter(p => selectedIds.includes(p.id));
+
+            if (isNaN(count) || count < 1) {
+                alert('請輸入有效的抽籤人數！');
+                return;
+            }
+            if (activePlayers.length < count) {
+                alert('選擇的玩家人數 (' + activePlayers.length + '人) 少於要抽出的人數 (' + count + '人)！請多勾選一些名單或降低抽取人數。');
+                return;
+            }
+
+            // Shuffle and Pick
+            const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+            let picked = shuffle(activePlayers).slice(0, count);
+
+            // Render
+            const container = document.getElementById('pickedContainer');
+            container.innerHTML = picked.map(p => `
+                <span class="px-3 py-1.5 text-base rounded-lg shadow-sm border ${p.gender === 'M' ? 'bg-blue-100 border-blue-200 text-blue-800' : 'bg-pink-100 border-pink-200 text-pink-800'} font-bold animate-fade-in flex items-center">
+                    <i class="fa-solid fa-crown mr-1.5 opacity-50 text-xs"></i>${p.name}
+                </span>
+            `).join('');
+
+            document.getElementById('pickerResults').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
