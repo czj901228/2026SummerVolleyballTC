@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 台中排球包棟 (Vol. 2)</title>
+    <title>2026 台中排球包棟 (Vol. 3)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome -->
@@ -80,12 +80,9 @@
         <i class="fa-solid fa-plane-departure absolute -right-10 -bottom-10 text-9xl opacity-10"></i>
         <div class="max-w-3xl mx-auto relative z-10">
             <div class="flex items-center justify-between mb-2">
-                <span class="bg-white/20 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm">Vol. 2 總計畫</span>
-                <!-- Action Badges (Countdown & Weather) -->
+                <span class="bg-white/20 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm">Vol. 3 總計畫</span>
+                <!-- Action Badges -->
                 <div class="flex gap-2">
-                    <div class="bg-blue-500/30 backdrop-blur-md px-2 py-1 rounded-lg text-xs font-bold text-white shadow-inner flex items-center border border-blue-400/30">
-                        <i class="fa-solid fa-sun text-yellow-300 mr-1.5"></i>台中
-                    </div>
                     <div class="bg-brand-900/50 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-mono font-bold text-yellow-300 shadow-inner flex items-center border border-brand-500/30">
                         <i class="fa-solid fa-hourglass-half animate-pulse mr-1.5"></i>
                         <span id="countdownDisplay">計算中...</span>
@@ -119,7 +116,7 @@
                 <i class="fa-solid fa-wallet mb-1 block text-lg"></i>財務
             </button>
             <button onclick="switchTab('drawer')" id="tab-drawer" class="tab-btn px-4 py-4 text-sm font-bold text-slate-500 border-b-2 border-transparent hover:text-brand-600 transition flex-1 text-center">
-                <i class="fa-solid fa-dice mb-1 block text-lg"></i>分隊
+                <i class="fa-solid fa-dice mb-1 block text-lg"></i>工具
             </button>
         </div>
     </nav>
@@ -203,7 +200,7 @@
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
                     <div class="flex justify-between items-start mb-2">
                         <span class="font-bold text-slate-800">[F] 7/20 傍晚：市區娛樂大亂鬥</span>
-                        <div class="flex gap-1"><span class="bg-brand-50 text-brand-600 border border-brand-200 px-2 py-0.5 rounded text-xs font-bold">Cassie品、劉宸瑋</span></div>
+                        <div class="flex gap-1"><span class="bg-brand-50 text-brand-600 border border-brand-200 px-2 py-0.5 rounded text-xs font-bold">YP、劉宸瑋</span></div>
                     </div>
                     <p class="text-sm text-slate-500">統籌傍晚育樂。請參考火車站共用地圖清單調查意願，可分開行動或一起行動。</p>
                 </div>
@@ -217,7 +214,7 @@
                     <span class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center mr-2">2</span>詳細行程表
                 </h2>
                 <!-- 一鍵加入全部行事曆 -->
-                <button onclick="downloadICS()" class="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-sm transition flex items-center justify-center text-sm">
+                <button onclick="downloadICS()" class="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 px-4 rounded-lg shadow-sm transition flex items-center justify-center text-sm">
                     <i class="fa-solid fa-calendar-check mr-2"></i> 一鍵匯入全部行程 (.ics)
                 </button>
             </div>
@@ -236,10 +233,10 @@
                         <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
                             <div class="font-bold text-brand-600 text-lg">09:00 - 11:30</div>
                             <div class="flex gap-2">
-                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
                                 </a>
-                                <button onclick="addToCalendar('🚗 前往台中包棟', '20260718T010000Z', '20260718T033000Z', '出發前往台中，依照各車群組約定地點上車。', '台中市')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <button onclick="addToCalendar('🚗 前往台中包棟', '20260718T010000Z', '20260718T033000Z', '出發前往台中，依照各車群組約定地點上車。', '台中市')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
                                 </button>
                             </div>
@@ -253,10 +250,10 @@
                         <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
                             <div class="font-bold text-brand-600 text-lg">11:30 - 15:00</div>
                             <div class="flex gap-2">
-                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
                                 </a>
-                                <button onclick="addToCalendar('🏐 排球包棟: 男網賽', '20260718T033000Z', '20260718T070000Z', '第一場熱血開打，男網賽事！', '諾亞方舟排球 西屯館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <button onclick="addToCalendar('🏐 排球包棟: 男網賽', '20260718T033000Z', '20260718T070000Z', '第一場熱血開打，男網賽事！', '諾亞方舟排球 西屯館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
                                 </button>
                             </div>
@@ -272,10 +269,10 @@
                         <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
                             <div class="font-bold text-brand-600 text-lg">15:00 - 18:00</div>
                             <div class="flex gap-2">
-                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
                                 </a>
-                                <button onclick="addToCalendar('🏐 排球包棟: 女網賽', '20260718T070000Z', '20260718T100000Z', '女網排球賽事！', '諾亞方舟排球 西屯館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <button onclick="addToCalendar('🏐 排球包棟: 女網賽', '20260718T070000Z', '20260718T100000Z', '女網排球賽事！', '諾亞方舟排球 西屯館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
                                 </button>
                             </div>
@@ -291,7 +288,7 @@
                         <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
                             <div class="font-bold text-brand-600 text-lg">18:30 - 19:30</div>
                             <div class="flex gap-2">
-                                <a href="https://maps.app.goo.gl/JbT15m7but9n7aLQ6" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <a href="https://maps.app.goo.gl/JbT15m7but9n7aLQ6" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>全聯導航
                                 </a>
                             </div>
@@ -306,10 +303,10 @@
                         <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
                             <div class="font-bold text-brand-600 text-lg">20:00 - 24:00</div>
                             <div class="flex gap-2">
-                                <a href="https://maps.app.goo.gl/FVZiUe9saaXzQZvq5" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
-                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                <a href="https://maps.app.goo.gl/FVZiUe9saaXzQZvq5" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>MOTEL 導航
                                 </a>
-                                <button onclick="addToCalendar('🏠 排球包棟: 晚餐與派對局', '20260718T120000Z', '20260718T160000Z', '入住 MOTEL，晚餐、喝酒、KTV派對時間！', '都樂 KTV MOTEL')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <button onclick="addToCalendar('🏠 排球包棟: 晚餐與派對局', '20260718T120000Z', '20260718T160000Z', '入住 MOTEL，晚餐、喝酒、KTV派對時間！', '都樂 KTV MOTEL')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
                                 </button>
                             </div>
@@ -331,8 +328,8 @@
                         <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
                             <div class="font-bold text-brand-600 text-lg">10:00 - 13:30</div>
                             <div class="flex gap-2">
-                                <a href="https://maps.app.goo.gl/FVZiUe9saaXzQZvq5" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
-                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                <a href="https://maps.app.goo.gl/FVZiUe9saaXzQZvq5" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>MOTEL 導航
                                 </a>
                             </div>
                         </div>
@@ -344,12 +341,27 @@
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                            <div class="font-bold text-brand-600 text-lg">13:30 - 14:30</div>
+                            <div class="flex gap-2">
+                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>球館導航
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bg-amber-50 p-3 rounded-lg shadow-sm border border-amber-100 mt-1">
+                            <div class="font-bold text-amber-800">🍺 酒精排球準備</div>
+                            <div class="text-sm text-amber-700 mt-1">場地佈置、設立垃圾袋喝酒區、酒水就位</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
                             <div class="font-bold text-brand-600 text-lg">15:00 - 17:00</div>
                             <div class="flex gap-2">
-                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
                                 </a>
-                                <button onclick="addToCalendar('🏐 排球包棟: Day2 女網', '20260719T070000Z', '20260719T090000Z', '女網排球交流賽', '諾亞方舟排球 西屯館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <button onclick="addToCalendar('🏐 排球包棟: Day2 女網', '20260719T070000Z', '20260719T090000Z', '女網排球交流賽', '諾亞方舟排球 西屯館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
                                 </button>
                             </div>
@@ -364,10 +376,10 @@
                         <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
                             <div class="font-bold text-brand-600 text-lg">17:00 - 22:00</div>
                             <div class="flex gap-2">
-                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <a href="https://maps.app.goo.gl/wUbY7Hr7XmVqW3pY7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
                                 </a>
-                                <button onclick="addToCalendar('🍻 酒精排球大戰', '20260719T090000Z', '20260719T140000Z', '酒精排球！需注意場地整潔。', '諾亞方舟排球 西屯館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <button onclick="addToCalendar('🍻 酒精排球大戰', '20260719T090000Z', '20260719T140000Z', '酒精排球！需注意場地整潔。', '諾亞方舟排球 西屯館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
                                 </button>
                             </div>
@@ -382,8 +394,8 @@
                         <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
                             <div class="font-bold text-brand-600 text-lg">22:30 - 24:00</div>
                             <div class="flex gap-2">
-                                <a href="https://maps.app.goo.gl/FVZiUe9saaXzQZvq5" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
-                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
+                                <a href="https://maps.app.goo.gl/FVZiUe9saaXzQZvq5" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
+                                    <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>MOTEL 導航
                                 </a>
                             </div>
                         </div>
@@ -404,17 +416,17 @@
                         <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
                             <div class="font-bold text-brand-600 text-lg">11:00 - 14:00</div>
                             <div class="flex gap-2">
-                                <a href="https://maps.app.goo.gl/SLyH6p5q6G96nBVU8" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <a href="https://maps.app.goo.gl/SLyH6p5q6G96nBVU8" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
                                 </a>
-                                <button onclick="addToCalendar('🏐 排球包棟: 最終戰', '20260720T030000Z', '20260720T060000Z', '把最後體力榨乾的排球戰', '波長排球館')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <button onclick="addToCalendar('🏐 排球包棟: 最終戰', '20260720T030000Z', '20260720T060000Z', '把最後體力榨乾的排球戰', '波長排球館 B Long')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
                                 </button>
                             </div>
                         </div>
                         <div class="bg-orange-50 p-3 rounded-lg shadow-sm border border-orange-100 mt-1">
                             <div class="font-bold text-orange-700">🏐 排球 - 女網</div>
-                            <div class="text-sm text-orange-600 mt-1">波長排球館或諾亞方舟</div>
+                            <div class="text-sm text-orange-600 mt-1">波長排球館 B Long</div>
                             <div class="text-xs text-orange-800 mt-1 font-bold">⚠️ 由林耿鋒進行分組，或使用 <button onclick="switchTab('drawer')" class="text-brand-600 underline font-bold bg-white px-2 py-0.5 rounded shadow-sm hover:bg-brand-50">分隊抽籤器</button></div>
                         </div>
                     </div>
@@ -423,10 +435,10 @@
                         <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
                             <div class="font-bold text-brand-600 text-lg">14:30 - 16:30</div>
                             <div class="flex gap-2">
-                                <a href="https://maps.app.goo.gl/ke5viTZS3koXjps59" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <a href="https://maps.app.goo.gl/ke5viTZS3koXjps59" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
                                 </a>
-                                <button onclick="addToCalendar('🍰 漢來海港下午茶', '20260720T063000Z', '20260720T083000Z', '頂級下午茶吃到飽', '漢來海港 台中廣三SOGO店')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <button onclick="addToCalendar('🍰 漢來海港下午茶', '20260720T063000Z', '20260720T083000Z', '頂級下午茶吃到飽', '漢來海港 台中廣三SOGO店')" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 hover:text-brand-800 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-regular fa-calendar-plus mr-1"></i>單筆加入
                                 </button>
                             </div>
@@ -441,14 +453,14 @@
                         <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
                             <div class="font-bold text-brand-600 text-lg">17:00 - 19:00</div>
                             <div class="flex gap-2">
-                                <a href="https://maps.app.goo.gl/4EUjRXrBwv8UpaiX7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1 rounded-md font-bold transition flex items-center shadow-sm">
+                                <a href="https://maps.app.goo.gl/4EUjRXrBwv8UpaiX7" target="_blank" class="text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 px-2.5 py-1.5 rounded-md font-bold transition flex items-center shadow-sm">
                                     <i class="fa-solid fa-map-location-dot mr-1 text-brand-500"></i>導航
                                 </a>
                             </div>
                         </div>
                         <div class="bg-purple-50 p-3 rounded-lg shadow-sm border border-purple-100 mt-1">
                             <div class="font-bold text-purple-700">🎳 市區娛樂大亂鬥</div>
-                            <div class="text-sm text-purple-600 mt-1">臺中火車站周邊 (由 <span class="font-bold text-purple-800">Cassie品、劉宸瑋</span> 負責，採現場AA)</div>
+                            <div class="text-sm text-purple-600 mt-1">臺中火車站周邊 (由 <span class="font-bold text-purple-800">YP、劉宸瑋</span> 負責，採現場AA)</div>
                         </div>
                     </div>
                     <div class="timeline-item">
@@ -511,21 +523,21 @@
             <h3 class="font-bold text-lg mb-3 flex items-center text-slate-700 bg-slate-100 p-2 rounded-lg"><i class="fa-solid fa-arrow-down mr-2 text-brand-500"></i> 去程：7/18 (六) 台北 ➔ 台中</h3>
             <div class="text-sm text-slate-500 mb-3 ml-2 font-bold">⏰ 出發時間：上午 09:00</div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3"><span class="font-bold text-brand-700">Car 1 (品豪)</span><div class="text-sm mt-1 text-slate-600">曾俐婕、陳怡瑄、簡懋甡(Dennis) <span class="text-xs text-slate-400 block mt-0.5">桃園-政大-台中</span></div></div>
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3"><span class="font-bold text-brand-700">Car 2 (Chad)</span><div class="text-sm mt-1 text-slate-600">施姵妤、彭于鈞(Kai)、陳建禎(Michael)、Nita <span class="text-xs text-slate-400 block mt-0.5">基隆-南港-麟光-台中</span></div></div>
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3"><span class="font-bold text-brand-700">Car 3 (Ruby)</span><div class="text-sm mt-1 text-slate-600">潘裔城、黃杉彬 <span class="text-xs text-slate-400 block mt-0.5">桃園-台中</span></div></div>
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3"><span class="font-bold text-brand-700">Car 4 (Leon)</span><div class="text-sm mt-1 text-slate-600">Cassie品、劉宸瑋 <span class="text-xs text-slate-400 block mt-0.5">永和-板橋-台中</span></div></div>
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3 md:col-span-2"><span class="font-bold text-brand-700">Car 5 (林昊)</span><div class="text-sm mt-1 text-slate-600">Cpz、林耿鋒、Mei <span class="text-xs text-slate-400 block mt-0.5">新三蘆-關渡-台中</span></div></div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3"><span class="font-bold text-brand-700">Car 1 (Chad)</span><div class="text-sm mt-1 text-slate-600">施姵妤、彭于鈞(Kai)、陳建禎(Michael)、Nita <span class="text-xs text-slate-400 block mt-0.5">基隆-南港-麟光-台中</span></div></div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3"><span class="font-bold text-brand-700">Car 2 (品豪)</span><div class="text-sm mt-1 text-slate-600">曾俐婕、Covia、陳怡瑄、簡懋甡(Dennis) <span class="text-xs text-slate-400 block mt-0.5">桃園-政大-台中</span></div></div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3"><span class="font-bold text-brand-700">Car 3 (Leon)</span><div class="text-sm mt-1 text-slate-600">Mei、劉宸瑋 <span class="text-xs text-slate-400 block mt-0.5">永和-板橋-新莊-台中</span></div></div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3"><span class="font-bold text-brand-700">Car 4 (Ruby)</span><div class="text-sm mt-1 text-slate-600">潘裔城、黃杉彬 <span class="text-xs text-slate-400 block mt-0.5">桃園-台中</span></div></div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-3 md:col-span-2"><span class="font-bold text-brand-700">Car 5 (林昊)</span><div class="text-sm mt-1 text-slate-600">Cpz、林耿鋒、YP <span class="text-xs text-slate-400 block mt-0.5">三蘆-行天宮-關渡-台中</span></div></div>
             </div>
 
             <!-- 在地機動 -->
             <h3 class="font-bold text-lg mb-3 flex items-center text-slate-700 bg-slate-100 p-2 rounded-lg"><i class="fa-solid fa-arrows-spin mr-2 text-brand-500"></i> 台中在地移動：7/18 - 7/20</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8 text-sm">
-                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 1 (品豪)</strong><br><span class="text-slate-600">曾俐婕, Covia, 陳怡瑄</span></div>
-                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 2 (Chad)</strong><br><span class="text-slate-600">Kai, Michael, Nita</span></div>
-                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 3 (Ruby)</strong><br><span class="text-slate-600">潘裔城, 黃杉彬</span></div>
-                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 4 (Leon)</strong><br><span class="text-slate-600">Cassie品, 劉宸瑋</span></div>
-                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 5 (林昊)</strong><br><span class="text-slate-600">Cpz, 林耿鋒, Mei</span></div>
+                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 1 (Chad)</strong><br><span class="text-slate-600">Kai, Michael, Nita</span></div>
+                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 2 (品豪)</strong><br><span class="text-slate-600">曾俐婕, Covia, 陳怡瑄</span></div>
+                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 3 (Leon)</strong><br><span class="text-slate-600">Mei, 劉宸瑋</span></div>
+                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 4 (Ruby)</strong><br><span class="text-slate-600">潘裔城, 黃杉彬</span></div>
+                <div class="bg-slate-50 rounded-lg border border-slate-200 p-2"><strong class="text-slate-700">機動 5 (林昊)</strong><br><span class="text-slate-600">Cpz, 林耿鋒, YP</span></div>
                 <div class="bg-amber-50 rounded-lg border border-amber-200 p-2"><strong class="text-amber-800">機動 6 (董尚原)</strong><br><span class="text-amber-700">Dennis, Olivia, 施姵妤</span></div>
             </div>
 
@@ -538,10 +550,10 @@
                     <i class="fa-solid fa-route mr-2 text-slate-500"></i> 方案 A：無林昊
                 </div>
                 <div class="p-3 grid grid-cols-1 md:grid-cols-2 gap-2 text-sm bg-white">
-                    <div class="border border-slate-100 p-2 rounded"><strong class="text-brand-600">Car 1 (品豪):</strong> 曾俐婕, Covia, 陳怡瑄, Dennis</div>
-                    <div class="border border-slate-100 p-2 rounded"><strong class="text-brand-600">Car 2 (Chad):</strong> 施姵妤, Kai, 林耿鋒, Cpz</div>
-                    <div class="border border-slate-100 p-2 rounded"><strong class="text-brand-600">Car 3 (Ruby):</strong> 潘裔城, 黃杉彬</div>
-                    <div class="border border-slate-100 p-2 rounded"><strong class="text-brand-600">Car 4 (Leon):</strong> Cassie品, 劉宸瑋, Mei</div>
+                    <div class="border border-slate-100 p-2 rounded"><strong class="text-brand-600">Car 1 (Chad):</strong> 施姵妤, Kai, Cpz, YP</div>
+                    <div class="border border-slate-100 p-2 rounded"><strong class="text-brand-600">Car 2 (品豪):</strong> 曾俐婕, 陳怡瑄, Dennis</div>
+                    <div class="border border-slate-100 p-2 rounded"><strong class="text-brand-600">Car 3 (Leon):</strong> 劉宸瑋, Mei</div>
+                    <div class="border border-slate-100 p-2 rounded"><strong class="text-brand-600">Car 4 (Ruby):</strong> 潘裔城, 黃杉彬</div>
                 </div>
             </div>
 
@@ -550,11 +562,11 @@
                     <i class="fa-solid fa-route mr-2 text-brand-500"></i> 方案 B：有林昊
                 </div>
                 <div class="p-3 grid grid-cols-1 md:grid-cols-2 gap-2 text-sm bg-white">
-                    <div class="border border-brand-50 p-2 rounded"><strong class="text-brand-600">Car 1 (品豪):</strong> 曾俐婕, Covia, 陳怡瑄, Dennis</div>
-                    <div class="border border-brand-50 p-2 rounded"><strong class="text-brand-600">Car 2 (Chad):</strong> 施姵妤, Kai</div>
-                    <div class="border border-brand-50 p-2 rounded"><strong class="text-brand-600">Car 3 (Ruby):</strong> 潘裔城, 黃杉彬</div>
-                    <div class="border border-brand-50 p-2 rounded"><strong class="text-brand-600">Car 4 (Leon):</strong> Cassie品, 劉宸瑋</div>
-                    <div class="border border-brand-50 p-2 rounded md:col-span-2"><strong class="text-brand-600">Car 5 (林昊):</strong> Cpz, 林耿鋒, Mei</div>
+                    <div class="border border-brand-50 p-2 rounded"><strong class="text-brand-600">Car 1 (Chad):</strong> 施姵妤, Kai, YP</div>
+                    <div class="border border-brand-50 p-2 rounded"><strong class="text-brand-600">Car 2 (品豪):</strong> 曾俐婕, 陳怡瑄, Dennis</div>
+                    <div class="border border-brand-50 p-2 rounded"><strong class="text-brand-600">Car 3 (Leon):</strong> 劉宸瑋</div>
+                    <div class="border border-brand-50 p-2 rounded"><strong class="text-brand-600">Car 4 (Ruby):</strong> 潘裔城, 黃杉彬</div>
+                    <div class="border border-brand-50 p-2 rounded md:col-span-2"><strong class="text-brand-600">Car 5 (林昊):</strong> Cpz, Mei</div>
                 </div>
             </div>
         </section>
@@ -617,13 +629,13 @@
                 <!-- Room D -->
                 <div class="bg-white border border-pink-200 rounded-xl p-4 shadow-sm">
                     <div class="font-bold text-pink-600 text-lg border-b border-slate-100 pb-2 mb-2">Room D <span class="text-sm font-normal text-slate-500 ml-1">2+1 女房</span></div>
-                    <div class="text-slate-700 font-medium leading-relaxed">Ruby, Mei, Cpz</div>
+                    <div class="text-slate-700 font-medium leading-relaxed">Ruby, 陳怡瑄, 施姵妤</div>
                 </div>
 
                 <!-- Room E -->
                 <div class="bg-white border border-pink-200 rounded-xl p-4 shadow-sm">
                     <div class="font-bold text-pink-600 text-lg border-b border-slate-100 pb-2 mb-2">Room E <span class="text-sm font-normal text-slate-500 ml-1">2+1 女房</span></div>
-                    <div class="text-slate-700 font-medium leading-relaxed">陳怡瑄, 施姵妤, Cassie品</div>
+                    <div class="text-slate-700 font-medium leading-relaxed">Mei, YP, Cpz</div>
                 </div>
 
                 <!-- Room F -->
@@ -643,7 +655,9 @@
 
         <!-- 5. 財務核算 -->
         <section id="content-finance" class="tab-content hidden animate-fade-in">
-            <h2 class="text-xl font-bold mb-4 flex items-center text-slate-800"><span class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center mr-2">5</span>財務指引與核算</h2>
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
+                <h2 class="text-xl font-bold flex items-center text-slate-800 mb-2 sm:mb-0"><span class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center mr-2">5</span>財務指引與核算</h2>
+            </div>
             
             <!-- 總預算概觀 -->
             <div class="bg-gradient-to-br from-brand-500 to-brand-700 rounded-xl shadow-lg p-5 text-white mb-6 relative overflow-hidden">
@@ -670,7 +684,7 @@
                     <div class="mb-2 sm:mb-0">
                         <div class="font-bold text-slate-800">A. 一般乘客 <span class="text-xs text-slate-500 font-normal ml-1">13人</span></div>
                         <div class="text-xs text-slate-400 mt-0.5">全包 + 車資 $650</div>
-                        <div class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 p-1.5 rounded inline-block">陳怡瑄, Dennis, 施姵妤, Kai, 潘裔城, 黃杉彬, Cassie品, 劉宸瑋, Cpz, 林耿鋒, Mei, Covia, 曾俐婕</div>
+                        <div class="text-xs text-slate-500 mt-1 font-medium bg-slate-50 p-1.5 rounded inline-block">Covia, Cpz, Mei, 劉宸瑋, Kai, 施姵妤, 曾俐婕, 林耿鋒, 潘裔城, Dennis, 陳怡瑄, 黃杉彬, YP</div>
                     </div>
                     <div class="font-bold text-brand-600 text-lg self-end sm:self-auto">$6,700</div>
                 </div>
@@ -766,12 +780,14 @@
             </div>
         </section>
 
-        <!-- 6. 抽籤分隊器 -->
+        <!-- 6. 抽籤分隊器與隨機工具 -->
         <section id="content-drawer" class="tab-content hidden animate-fade-in">
+            
+            <!-- 分隊器 -->
             <h2 class="text-xl font-bold mb-4 flex items-center text-slate-800"><span class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center mr-2"><i class="fa-solid fa-dice"></i></span>排球抽籤分隊器</h2>
             
-            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
-                <h3 class="font-bold text-slate-700 mb-3 border-b border-slate-100 pb-2">1. 選擇參加抽籤的人員</h3>
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-8">
+                <h3 class="font-bold text-slate-700 mb-3 border-b border-slate-100 pb-2">1. 選擇名單 (以下兩工具共用)</h3>
                 
                 <!-- Males -->
                 <div class="mb-3">
@@ -795,7 +811,7 @@
                     </div>
                 </div>
 
-                <h3 class="font-bold text-slate-700 mb-3 border-b border-slate-100 pb-2 mt-6">2. 選擇分隊設定</h3>
+                <h3 class="font-bold text-slate-700 mb-3 border-b border-slate-100 pb-2 mt-6">2. 分隊設定</h3>
                 <div class="flex flex-col sm:flex-row gap-3 mb-4">
                     <!-- 模式選擇 -->
                     <select id="drawMode" class="bg-slate-50 border border-slate-300 text-slate-700 rounded-lg block w-full p-2.5 focus:ring-brand-500 focus:border-brand-500 font-medium">
@@ -814,13 +830,13 @@
 
                     <!-- 抽籤按鈕 -->
                     <button onclick="drawTeams()" class="w-full sm:w-auto bg-brand-600 hover:bg-brand-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition duration-200 flex items-center justify-center whitespace-nowrap shrink-0">
-                        <i class="fa-solid fa-shuffle mr-2"></i> 產生分隊
+                        <i class="fa-solid fa-users-rays mr-2"></i> 產生分隊
                     </button>
                 </div>
             </div>
 
-            <!-- Results -->
-            <div id="drawResults" class="hidden mb-6">
+            <!-- Team Results -->
+            <div id="drawResults" class="hidden mb-10">
                 <h3 class="font-bold text-slate-700 mb-3 text-center text-lg">🎉 分隊結果</h3>
                 <div id="teamsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <!-- Dynamically populated by JS -->
@@ -829,10 +845,10 @@
 
             <!-- 隨機抽人器 -->
             <div class="mt-8 border-t-2 border-slate-200 pt-6"></div>
-            <h2 class="text-xl font-bold mb-4 flex items-center text-slate-800"><span class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center mr-2"><i class="fa-solid fa-hand-pointer"></i></span>隨機抽人器</h2>
+            <h2 class="text-xl font-bold mb-4 flex items-center text-slate-800"><span class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center mr-2"><i class="fa-solid fa-hand-pointer"></i></span>隨機天選工具</h2>
             <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
-                <p class="text-sm text-slate-500 mb-4">系統將從上方<strong class="text-slate-700">已勾選的名單</strong>中，隨機抽出指定人數。</p>
-                <div class="flex flex-col sm:flex-row gap-3 mb-4 items-center">
+                <p class="text-sm text-slate-500 mb-4">系統將從上方<strong class="text-slate-700">已勾選的名單</strong>中，隨機抽出指定人數 (適合抽籤買宵夜或當隊長)。</p>
+                <div class="flex flex-col sm:flex-row gap-3 items-center">
                     <div class="flex items-center w-full sm:w-auto">
                         <label for="pickCount" class="font-bold text-slate-700 mr-3 whitespace-nowrap">要抽出幾人？</label>
                         <input type="number" id="pickCount" min="1" max="22" value="1" class="bg-slate-50 border border-slate-300 text-slate-700 rounded-lg block w-full p-2.5 focus:ring-purple-500 focus:border-purple-500 font-bold text-center">
@@ -842,7 +858,7 @@
                     </button>
                 </div>
                 
-                <div id="pickerResults" class="hidden mt-4 pt-4 border-t border-slate-100">
+                <div id="pickerResults" class="hidden mt-6 pt-4 border-t border-slate-100">
                     <h3 class="font-bold text-slate-700 mb-3 text-center">🎯 中籤名單</h3>
                     <div id="pickedContainer" class="flex flex-wrap gap-2 justify-center">
                         <!-- JS populated -->
@@ -893,7 +909,7 @@
                 { title: "🏠 排球包棟: 晚餐與派對局", start: "20260718T120000Z", end: "20260718T160000Z", desc: "入住 MOTEL，晚餐、喝酒、KTV派對時間！", loc: "都樂 KTV MOTEL" },
                 { title: "🏐 排球包棟: Day2 女網", start: "20260719T070000Z", end: "20260719T090000Z", desc: "女網排球交流賽", loc: "諾亞方舟排球 西屯館" },
                 { title: "🍻 酒精排球大戰", start: "20260719T090000Z", end: "20260719T140000Z", desc: "酒精排球！需注意場地整潔。", loc: "諾亞方舟排球 西屯館" },
-                { title: "🏐 排球包棟: 最終戰", start: "20260720T030000Z", end: "20260720T060000Z", desc: "把最後體力榨乾的排球戰", loc: "波長排球館" },
+                { title: "🏐 排球包棟: 最終戰", start: "20260720T030000Z", end: "20260720T060000Z", desc: "把最後體力榨乾的排球戰", loc: "波長排球館 B Long" },
                 { title: "🍰 漢來海港下午茶", start: "20260720T063000Z", end: "20260720T083000Z", desc: "頂級下午茶吃到飽", loc: "漢來海港 台中廣三SOGO店" }
             ];
 
@@ -940,7 +956,8 @@
         }
         setInterval(updateCountdown, 1000);
 
-        // --- Team Drawer Logic ---
+        // --- Players Data ---
+        // Cassie品 已被替換為 YP
         const players = [
             { id: 'm1', name: 'Chad', gender: 'M' },
             { id: 'm2', name: '品豪', gender: 'M' },
@@ -959,7 +976,7 @@
             { id: 'f3', name: 'Cpz', gender: 'F' },
             { id: 'f4', name: '陳怡瑄', gender: 'F' },
             { id: 'f5', name: '施姵妤', gender: 'F' },
-            { id: 'f6', name: 'Cassie品', gender: 'F' },
+            { id: 'f6', name: 'YP', gender: 'F' },
             { id: 'f7', name: '曾俐婕', gender: 'F' },
             { id: 'f8', name: 'Covia', gender: 'F' },
             { id: 'f9', name: 'Olivia', gender: 'F' },
@@ -992,6 +1009,7 @@
             checkboxes.forEach(cb => cb.checked = !allChecked);
         }
 
+        // --- Team Drawer Logic ---
         function drawTeams() {
             const mode = document.getElementById('drawMode').value;
             const teamCount = parseInt(document.getElementById('teamCount').value, 10);
@@ -1041,7 +1059,7 @@
                 const teamName = 'Team ' + String.fromCharCode(65 + idx); // Team A, B, C...
                 
                 container.innerHTML += `
-                    <div class="${s.bg} border ${s.border} rounded-xl p-4 shadow-sm">
+                    <div class="${s.bg} border ${s.border} rounded-xl p-4 shadow-sm animate-fade-in">
                         <div class="flex items-center justify-between mb-3 border-b ${s.border} pb-2">
                             <h4 class="font-bold ${s.text} text-lg">${teamName}</h4>
                             <span class="${s.badge} text-xs px-2 py-1 rounded-full font-bold">${team.length} 人</span>
@@ -1089,6 +1107,7 @@
             `).join('');
 
             document.getElementById('pickerResults').classList.remove('hidden');
+            document.getElementById('pickerResults').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     </script>
 </body>
